@@ -1,4 +1,4 @@
 {
-        "python.terminal.activateEnvironment": true,
-        "dvc.pythonPath": "/workspace/open-source-mlops-e2e/.venv/bin/python"
+        "dvc.pythonPath": "/workspace/open-source-mlops-e2e/.venv/bin/python",
+        "python.terminal.activateEnvironment": true
 }
