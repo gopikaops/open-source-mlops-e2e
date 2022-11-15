@@ -62,6 +62,15 @@ stages:
       md5: cba1330c2a2df90da650b74d214b0bd0.dir
       size: 722258
       nfiles: 4
+      files:
+      - md5: fdfb4bb17229ba5ca7d87c398deff081
+        relpath: X_test.pkl
+      - md5: 1b8ddaf25fc5539a826789b9ed75468e
+        relpath: X_train.pkl
+      - md5: 5443405013ae6e0dbb4ebbe2ee290613
+        relpath: y_test.pkl
+      - md5: 316d3427c2dd408169a28f537994bf03
+        relpath: y_train.pkl
     - path: src/stages/train.py
       md5: 2c9c73e54f3d0f11ad7a855e7089278c
       size: 2126
@@ -102,6 +111,15 @@ stages:
       md5: cba1330c2a2df90da650b74d214b0bd0.dir
       size: 722258
       nfiles: 4
+      files:
+      - md5: fdfb4bb17229ba5ca7d87c398deff081
+        relpath: X_test.pkl
+      - md5: 1b8ddaf25fc5539a826789b9ed75468e
+        relpath: X_train.pkl
+      - md5: 5443405013ae6e0dbb4ebbe2ee290613
+        relpath: y_test.pkl
+      - md5: 316d3427c2dd408169a28f537994bf03
+        relpath: y_train.pkl
     - path: models/clf-model.joblib
       md5: f9bd112c1aea6ab0f694ddf237a14872
       size: 16467224
