@@ -35,41 +35,41 @@ stages:
           targ_col: Exited
           random_state: 42
         data_split:
-          test_size: 0.25
+          test_size: 0.2
           processed_data_dir: data/processed
     outs:
     - path: data/processed
-      md5: 9f384869826bdf146e6ff572c85d0d1e.dir
+      md5: cba1330c2a2df90da650b74d214b0bd0.dir
       size: 722258
       nfiles: 4
       files:
-      - size: 135795
-        md5: c7ff4cca4220bce33a14e89de861e2c5
+      - size: 108867
+        md5: fdfb4bb17229ba5ca7d87c398deff081
         relpath: X_test.pkl
-      - size: 405444
-        md5: da4bdc53955002a05bf9f0d15aa15094
+      - size: 432372
+        md5: 1b8ddaf25fc5539a826789b9ed75468e
         relpath: X_train.pkl
-      - size: 45565
-        md5: b7411d516759b2184cc982a914d950e2
+      - size: 36589
+        md5: 5443405013ae6e0dbb4ebbe2ee290613
         relpath: y_test.pkl
-      - size: 135454
-        md5: 8647275e1303869cfd3c6224ac6ebd3f
+      - size: 144430
+        md5: 316d3427c2dd408169a28f537994bf03
         relpath: y_train.pkl
   train:
     cmd: python src/stages/train.py --config=params.yaml
     deps:
     - path: data/processed
-      md5: 9f384869826bdf146e6ff572c85d0d1e.dir
+      md5: cba1330c2a2df90da650b74d214b0bd0.dir
       size: 722258
       nfiles: 4
       files:
-      - md5: c7ff4cca4220bce33a14e89de861e2c5
+      - md5: fdfb4bb17229ba5ca7d87c398deff081
         relpath: X_test.pkl
-      - md5: da4bdc53955002a05bf9f0d15aa15094
+      - md5: 1b8ddaf25fc5539a826789b9ed75468e
         relpath: X_train.pkl
-      - md5: b7411d516759b2184cc982a914d950e2
+      - md5: 5443405013ae6e0dbb4ebbe2ee290613
         relpath: y_test.pkl
-      - md5: 8647275e1303869cfd3c6224ac6ebd3f
+      - md5: 316d3427c2dd408169a28f537994bf03
         relpath: y_train.pkl
     - path: src/stages/train.py
       md5: 2c9c73e54f3d0f11ad7a855e7089278c
@@ -102,27 +102,27 @@ stages:
             max_depth: 20
     outs:
     - path: models/clf-model.joblib
-      md5: 44848c27bbe0a45a48de4125cfa53a11
-      size: 20682184
+      md5: 9358c1b2ff5842960f170f7a5f974e2c
+      size: 21916264
   eval:
     cmd: python src/stages/eval.py --config=params.yaml
     deps:
     - path: data/processed
-      md5: 9f384869826bdf146e6ff572c85d0d1e.dir
+      md5: cba1330c2a2df90da650b74d214b0bd0.dir
       size: 722258
       nfiles: 4
       files:
-      - md5: c7ff4cca4220bce33a14e89de861e2c5
+      - md5: fdfb4bb17229ba5ca7d87c398deff081
         relpath: X_test.pkl
-      - md5: da4bdc53955002a05bf9f0d15aa15094
+      - md5: 1b8ddaf25fc5539a826789b9ed75468e
         relpath: X_train.pkl
-      - md5: b7411d516759b2184cc982a914d950e2
+      - md5: 5443405013ae6e0dbb4ebbe2ee290613
         relpath: y_test.pkl
-      - md5: 8647275e1303869cfd3c6224ac6ebd3f
+      - md5: 316d3427c2dd408169a28f537994bf03
         relpath: y_train.pkl
     - path: models/clf-model.joblib
-      md5: 44848c27bbe0a45a48de4125cfa53a11
-      size: 20682184
+      md5: 9358c1b2ff5842960f170f7a5f974e2c
+      size: 21916264
     - path: src/stages/eval.py
       md5: 5dc0b6e6bdf436234530ccb3657cb12a
       size: 2431
@@ -146,7 +146,7 @@ stages:
           targ_col: Exited
           random_state: 42
         data_split:
-          test_size: 0.25
+          test_size: 0.2
           processed_data_dir: data/processed
         train:
           model_type: randomforest
@@ -157,11 +157,11 @@ stages:
             max_depth: 20
     outs:
     - path: metrics.json
-      md5: 74215be39d8e96aeb80424734c05c30e
+      md5: d09999567bf1267d286f451e89ae31f9
       size: 67
     - path: reports/feat_imp.csv
-      md5: 8121a8e2486e996a57579bb709054607
+      md5: e3f542978e5425e62994b7536cc7cba7
       size: 186
     - path: reports/figures/cm.png
-      md5: 3592f8149ee72012e5df155381f68140
-      size: 10022
+      md5: 459e0d2fdf612ddf96cffe516a768dae
+      size: 10380
