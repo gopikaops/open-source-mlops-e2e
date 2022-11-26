@@ -1,4 +1,4 @@
-.dvc/*
-data/*
-notebooks/*
-reports/*
+.dvc
+data
+notebooks
+reports
