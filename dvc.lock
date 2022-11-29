@@ -44,15 +44,23 @@ stages:
       nfiles: 4
       files:
       - size: 108867
+        version_id: 4v2WVSvUg9GYldHK5HjCSuJ8t.hm7J1X
+        etag: fdfb4bb17229ba5ca7d87c398deff081
         md5: fdfb4bb17229ba5ca7d87c398deff081
         relpath: X_test.pkl
       - size: 432372
+        version_id: ecUIgrhQOjknaH_BsGVXlNfZON_umX0o
+        etag: 1b8ddaf25fc5539a826789b9ed75468e
         md5: 1b8ddaf25fc5539a826789b9ed75468e
         relpath: X_train.pkl
       - size: 36589
+        version_id: kBvB25nxq_GVX7C1cbtbSNiOir101w2D
+        etag: 5443405013ae6e0dbb4ebbe2ee290613
         md5: 5443405013ae6e0dbb4ebbe2ee290613
         relpath: y_test.pkl
       - size: 144430
+        version_id: Aj.z0t_noQSDc6zMkj9FC0UlavNcSfYT
+        etag: 316d3427c2dd408169a28f537994bf03
         md5: 316d3427c2dd408169a28f537994bf03
         relpath: y_train.pkl
   train:
@@ -104,6 +112,8 @@ stages:
     - path: models/clf-model.joblib
       md5: 5b59725edbd6761e169a97b1af53f369
       size: 16992248
+      version_id: BuCwH3vXAivNAXqPnhWpcuV4Sw3XGU61
+      etag: 5b59725edbd6761e169a97b1af53f369
   eval:
     cmd: python src/stages/eval.py --config=params.yaml
     deps:
@@ -165,3 +175,75 @@ stages:
     - path: reports/figures/cm.png
       md5: 2c82ebea3f79b4427131edb4259a6c9b
       size: 9937
+  train_drift_detector:
+    cmd: python src/stages/drift_detector.py --config=params.yaml
+    deps:
+    - path: data/processed
+      md5: cba1330c2a2df90da650b74d214b0bd0.dir
+      size: 722258
+      nfiles: 4
+      files:
+      - md5: fdfb4bb17229ba5ca7d87c398deff081
+        relpath: X_test.pkl
+      - md5: 1b8ddaf25fc5539a826789b9ed75468e
+        relpath: X_train.pkl
+      - md5: 5443405013ae6e0dbb4ebbe2ee290613
+        relpath: y_test.pkl
+      - md5: 316d3427c2dd408169a28f537994bf03
+        relpath: y_train.pkl
+    - path: models/clf-model.joblib
+      md5: 5b59725edbd6761e169a97b1af53f369
+      size: 16992248
+    - path: src/stages/drift_detector.py
+      md5: 046d9c962b279c852bac5fec0cbb3077
+      size: 1388
+    params:
+      params.yaml:
+        base:
+          project: bank_customer_churn
+          raw_data_dir: data/raw
+          countries:
+          - France
+          - Spain
+          feat_cols:
+          - CreditScore
+          - Age
+          - Tenure
+          - Balance
+          - NumOfProducts
+          - HasCrCard
+          - IsActiveMember
+          - EstimatedSalary
+          targ_col: Exited
+          random_state: 42
+        data_split:
+          test_size: 0.2
+          processed_data_dir: data/processed
+        train:
+          model_type: randomforest
+          model_dir: models
+          model_path: models/clf-model.joblib
+          params:
+            n_estimators: 150
+            max_depth: 30
+    outs:
+    - path: models/drift_detector
+      md5: 4e606dbd54a75b87ea3aac956499db4e.dir
+      size: 483609
+      nfiles: 3
+      files:
+      - size: 414
+        version_id: l4IpMFBzqgc.e5WZQyAQeVmLx.IuUVoK
+        etag: 701f19ce63efeef27a6cebdad21b6940
+        md5: 701f19ce63efeef27a6cebdad21b6940
+        relpath: config.toml
+      - size: 3643
+        version_id: Bm_pFQOudxpe.vSQqEJgauFs768qXV9v
+        etag: c42532a284a32bc563aa974b35d3829f
+        md5: c42532a284a32bc563aa974b35d3829f
+        relpath: preprocess_fn/function.dill
+      - size: 479552
+        version_id: dkQEvq_gm.kjgCN7OrASjigVJU0.eOlY
+        etag: e62213c15d1893a154f063557933c913
+        md5: e62213c15d1893a154f063557933c913
+        relpath: x_ref.npy
