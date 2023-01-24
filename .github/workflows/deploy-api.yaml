@@ -2,7 +2,7 @@ name: deploy
 on:
   push:
     tags:
-      - "-vdeploy*"
+      - "deploy-v*"
 jobs:
   Deploy:
     runs-on: ubuntu-latest
