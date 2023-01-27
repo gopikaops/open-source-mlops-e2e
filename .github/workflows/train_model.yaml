@@ -30,7 +30,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           pip install -r requirements.txt
-          dvc pull --remote myremote
+          dvc pull -r myremote
           dvc repro
           dvc push
           # Create CML report
