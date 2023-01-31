@@ -129,3 +129,50 @@ stages:
     - path: reports/figures/cm.png
       md5: 7b146755d623ed9b0fc010e27aa0bacd
       size: 10017
+  train_drift_detector:
+    cmd: python src/stages/drift_detector.py --config=params.yaml
+    deps:
+    - path: data/processed
+      md5: 9f384869826bdf146e6ff572c85d0d1e.dir
+      size: 722258
+      nfiles: 4
+    - path: models/clf-model.joblib
+      md5: ff2ea8e02cf927d3b43e1addae41bf72
+      size: 21312120
+    - path: src/stages/drift_detector.py
+      md5: 046d9c962b279c852bac5fec0cbb3077
+      size: 1388
+    params:
+      params.yaml:
+        base:
+          project: bank_customer_churn
+          raw_data_dir: data/raw
+          countries:
+          - France
+          - Spain
+          feat_cols:
+          - CreditScore
+          - Age
+          - Tenure
+          - Balance
+          - NumOfProducts
+          - HasCrCard
+          - IsActiveMember
+          - EstimatedSalary
+          targ_col: Exited
+          random_state: 42
+        data_split:
+          test_size: 0.25
+          processed_data_dir: data/processed
+        train:
+          model_type: randomforest
+          model_dir: models
+          model_path: models/clf-model.joblib
+          params:
+            n_estimators: 200
+            max_depth: 30
+    outs:
+    - path: models/drift_detector
+      md5: ef5a75bc098636896823aa6a963b0fee.dir
+      size: 483667
+      nfiles: 3
